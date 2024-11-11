@@ -1,0 +1,85 @@
+-- Job Position Table
+CREATE TABLE Job_Position (
+    Job_id INT PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    Salary DECIMAL(10, 2),
+    Description TEXT,
+    Department VARCHAR(50)
+);
+
+-- Recruiter Table
+CREATE TABLE Recruiter (
+    Recruiter_id INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Phone VARCHAR(15),
+    Email VARCHAR(100),
+    Department VARCHAR(50)
+);
+
+-- Applicant Table
+CREATE TABLE Applicant (
+    Applicant_id INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100),
+    Resume TEXT,
+    Application_date DATE,
+    Gender CHAR(1),
+    Age INT,
+    Recruiter_id INT,
+    Job_id INT,
+    FOREIGN KEY (Recruiter_id) REFERENCES Recruiter(Recruiter_id),
+    FOREIGN KEY (Job_id) REFERENCES Job_Position(Job_id)
+);
+
+-- Interview Table
+CREATE TABLE Interview (
+    Interview_id INT PRIMARY KEY,
+    Applicant_id INT,
+    Job_id INT,
+    Recruiter_id INT,
+    Interview_date DATE,
+    Interview_Score DECIMAL(4, 2),
+    FOREIGN KEY (Applicant_id) REFERENCES Applicant(Applicant_id),
+    FOREIGN KEY (Job_id) REFERENCES Job_Position(Job_id),
+    FOREIGN KEY (Recruiter_id) REFERENCES Recruiter(Recruiter_id)
+);
+
+-- AI Evaluation Table
+CREATE TABLE AI_Evaluation (
+    Evaluation_id INT PRIMARY KEY,
+    Applicant_id INT,
+    Job_id INT,
+    Evaluation_date DATE,
+    Evaluation_Score DECIMAL(4, 2),
+    FOREIGN KEY (Applicant_id) REFERENCES Applicant(Applicant_id),
+    FOREIGN KEY (Job_id) REFERENCES Job_Position(Job_id)
+);
+
+-- Bias Table
+CREATE TABLE Bias (
+    Bias_id INT PRIMARY KEY,
+    Interview_id INT,
+    Evaluation_id INT,
+    Applicant_id INT,
+    Job_id INT,
+    Interview_Bias_Status VARCHAR(50), -- e.g., "Biased", "Unbiased"
+    FOREIGN KEY (Interview_id) REFERENCES Interview(Interview_id),
+    FOREIGN KEY (Evaluation_id) REFERENCES AI_Evaluation(Evaluation_id),
+    FOREIGN KEY (Applicant_id) REFERENCES Applicant(Applicant_id),
+    FOREIGN KEY (Job_id) REFERENCES Job_Position(Job_id)
+);
+
+-- Hiring Offer Table
+CREATE TABLE Hiring_Offer (
+    Hiring_id INT PRIMARY KEY,
+    Applicant_id INT,
+    Job_id INT,
+    Evaluation_id INT,
+    Interview_id INT,
+    Interview_Bias_Status VARCHAR(50), -- Directly derived from Bias table for quick reference
+    Hiring_status VARCHAR(50), -- e.g., "Offered", "Rejected"
+    FOREIGN KEY (Applicant_id) REFERENCES Applicant(Applicant_id),
+    FOREIGN KEY (Job_id) REFERENCES Job_Position(Job_id),
+    FOREIGN KEY (Evaluation_id) REFERENCES AI_Evaluation(Evaluation_id),
+    FOREIGN KEY (Interview_id) REFERENCES Interview(Interview_id)
+);
