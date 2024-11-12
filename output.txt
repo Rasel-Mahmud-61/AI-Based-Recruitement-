@@ -1,1 +1,70 @@
-hello c#
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Simple Calculator");
+            Console.WriteLine("-----------------");
+
+            Console.WriteLine("ENTER A VALID NUMBER=> ");
+            double num1 = ValidNumber();
+
+            Console.WriteLine("ENTER A VALID OPERATOR (+, -, *, /) =>");
+            char Operator = ValidOperator();
+
+            Console.WriteLine("ENTER A VALID NUMBER=> ");
+            double num2 = ValidNumber();
+
+            double result = PerformOperation(num1, num2, Operator);
+
+            Console.WriteLine($"Result of operation: {result}");
+        }
+
+        static double ValidNumber()
+        {
+            double num;
+            while (!double.TryParse(Console.ReadLine(), out num))
+            {
+                Console.WriteLine("INVALID NUMBER. PLEASE GIVE A VALID NUMBER:");
+            }
+            return num;
+        }
+
+        static char ValidOperator()
+        {
+            char operation;
+            while (!char.TryParse(Console.ReadLine(), out operation) ||
+                   (operation != '+' && operation != '-' && operation != '*' && operation != '/'))
+            {
+                Console.WriteLine("Invalid operator. Please enter a valid operator (+, -, *, /): ");
+            }
+            return operation;
+        }
+
+        static double PerformOperation(double num1, double num2, char Operator)
+        {
+            switch (Operator)
+            {
+                case '+':
+                    return num1 + num2;
+                case '-':
+                    return num1 - num2;
+                case '*':
+                    return num1 * num2;
+                case '/':
+                    if (num2 == 0)
+                    {
+                        Console.WriteLine("Error: Division by zero is not allowed.");
+                        return double.NaN; // Return Not a Number (NaN) to indicate invalid operation
+                    }
+                    return num1 / num2;
+                default:
+                    return 0; // Default case (shouldn't be hit due to validation)
+            }
+        }
+    }
+}
+
