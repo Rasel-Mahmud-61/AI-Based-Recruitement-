@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AlBasedRecruiter.Models.Recruiter>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of all Recruiter</title>
+    <style>
+        /* Basic table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+    <h2>List Of Recruiter </h2>
+    <table>
+        <thead>
+            <tr>
+                <th>RecruiterId</th> <!-- Corrected missing ">" here -->
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var job in Model)
+            {
+                <tr>
+                    <td>@job.RecruiterId</td>
+                    <td>@job.Name</td>
+                    <td>@job.Phone</td>
+                    <td>@job.Email</td>
+                    <td>@job.Department</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

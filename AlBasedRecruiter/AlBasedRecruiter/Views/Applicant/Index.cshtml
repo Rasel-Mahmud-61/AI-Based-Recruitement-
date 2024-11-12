@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AlBasedRecruiter.Models.Applicant>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Candidates</title>
+    <style>
+        /* Basic table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Applicant List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ApplicantId</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Resume</th>
+                <th>ApplicationDate</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Recruiter</th>
+                <th>Job</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var applicant in Model)
+            {
+                <tr>
+                    <td>@applicant.ApplicantId</td>
+                    <td>@applicant.Name</td>
+                    <td>@applicant.Email</td>
+                    <td>@applicant.Resume</td>
+                    <td>@applicant.ApplicationDate.ToShortDateString()</td>
+                    <td>@applicant.Gender</td>
+                    <td>@applicant.Age</td>
+                    <td>@applicant.Recruiter?.Name</td>  <!-- Show recruiter name -->
+                    <td>@applicant.JobPosition?.Title</td> 
+                    <td>@applicant.Recruiter?.Department</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

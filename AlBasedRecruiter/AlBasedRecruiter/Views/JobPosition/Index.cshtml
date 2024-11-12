@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AlBasedRecruiter.Models.JobPosition>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Positions</title>
+    <style>
+        /* Basic table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Job Positions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>JobId</th> <!-- Corrected missing ">" here -->
+                <th>Title</th>
+                <th>Salary</th>
+                <th>Description</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var job in Model)
+            {
+                <tr>
+                    <td>@job.JobId</td>
+                    <td>@job.Title</td>
+                    <td>@job.Salary</td>
+                    <td>@job.Description</td>
+                    <td>@job.Department</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
