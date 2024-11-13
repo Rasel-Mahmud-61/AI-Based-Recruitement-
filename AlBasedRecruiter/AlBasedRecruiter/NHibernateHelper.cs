@@ -2,7 +2,6 @@
 using FluentNHibernate.Cfg;
 using NHibernate;
 using AlBasedRecruiter.Models;
-using ISession = NHibernate.ISession;
 
 namespace AlBasedRecruiter
 {
@@ -18,13 +17,18 @@ namespace AlBasedRecruiter
                 {
                     string connectionString = "Data Source=LAPTOP-SP1NASH4\\SQLEXPRESS;Initial Catalog = AIRecruitement;TrustServerCertificate=True; Trusted_Connection=True;";
                     _sessionFactory = Fluently.Configure()
-                        .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString).ShowSql())
+                        .Database(MsSqlConfiguration.MsSql2012.ConnectionString(connectionString)
+                                                              .CommandTimeout(60)
+                                                              .ShowSql())
 
                        .Mappings(m => m.FluentMappings
                             .AddFromAssemblyOf<JobPosition>()   // Adds JobPosition mappings
                             .AddFromAssemblyOf<Applicant>()     // Adds Applicant mappings
-                            .AddFromAssemblyOf<Recruiter>()     // Adds Recruiter mappings
-                                                                // You can add more models similarly
+                            .AddFromAssemblyOf<Recruiter>()  
+                            .AddFromAssemblyOf<Interview>()
+                             .AddFromAssemblyOf<AIEvaluation>() 
+                             .AddFromAssemblyOf<Bias>()
+                      
                         )
 
                         .BuildSessionFactory();
@@ -39,8 +43,6 @@ namespace AlBasedRecruiter
             return SessionFactory.OpenSession();
         }
 
-        internal class Isession
-        {
-        }
+        
     }
 }

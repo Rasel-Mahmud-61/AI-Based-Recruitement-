@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AlBasedRecruiter.Models.HiringOffer>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Candidates</title>
+    <style>
+        /* Basic table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Applicant List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>HiringId</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Evaluation</th>
+                <th>InterViewScore</th>
+                <th>HiringStatus</th>
+                <th>InterViewBiasStatus</th>
+        </thead>
+        <tbody>
+            @foreach (var applicant in Model)
+            {
+                <tr>
+                    <td>@applicant.HiringId</td>
+                    <td>@applicant.Applicant?.Name</td>
+                    <td>@applicant.JobPosition?.Title>
+                    <td>@applicant.AIEvaluation?.EvaluationScore</td>
+                    <td>@applicant.Interview?.InterviewScore</td>
+
+                    <td>@applicant.HiringStatus</td>
+                    <td>@applicant.InterViewBiasStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

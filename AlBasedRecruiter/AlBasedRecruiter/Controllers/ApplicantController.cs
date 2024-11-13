@@ -9,7 +9,7 @@ namespace AlBasedRecruiter.Controllers
     public class ApplicantController : Controller
     {
 
-        private NhibernateHelper.Isession session;
+   
 
         [HttpGet]
         public IActionResult Index()

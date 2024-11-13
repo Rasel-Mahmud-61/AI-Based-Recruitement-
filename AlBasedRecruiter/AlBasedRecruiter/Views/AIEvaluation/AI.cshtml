@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AlBasedRecruiter.Models.AIEvaluation>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Candidates</title>
+    <style>
+        /* Basic table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Applicant List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>EvaluationId</th>
+                <th>EvaluationDate</th>
+                <th>EvaluationScore</th>
+                <th>Name</th>
+                <th>JobPosition</th>
+                
+              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evaluation in Model)
+            {
+                <tr>
+                     <td>@evaluation.EvaluationId</td>
+                     <td>@evaluation.EvaluationDate</td>
+                     <td>@evaluation.EvaluationScore</td>
+                     <td>@evaluation.Applicant?.Name</td>
+                     <td>@evaluation.JobPosition?.Title</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

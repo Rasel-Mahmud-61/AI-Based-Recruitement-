@@ -8,8 +8,7 @@ namespace AlBasedRecruiter.Controllers
 {
     public class JobPositionController : Controller
     {
-        private NHibernate.ISession session;
-
+       
         // Constructor to initialize session
 
         [HttpGet]

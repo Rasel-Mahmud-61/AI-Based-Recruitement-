@@ -9,7 +9,7 @@ namespace AlBasedRecruiter.Mapping
 
             Table("Recruiter");
             Id(x => x.RecruiterId).Column("Recruiter_id");
-            Map(x => x.Name).Not.Nullable();
+            Map(x => x.Name);
             Map(x => x.Phone);
             Map(x => x.Email);
             Map(x => x.Department);

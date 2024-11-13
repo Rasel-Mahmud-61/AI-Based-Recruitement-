@@ -1,13 +1,11 @@
 ﻿using AlBasedRecruiter.Models;
 using Microsoft.AspNetCore.Mvc;
-using NHibernate;
 using NHibernate.Linq;
 
 namespace AlBasedRecruiter.Controllers
 {
     public class InterviewController : Controller
     {
-        [HttpGet]
         public IActionResult InterviewIndex()
         {
             using (var session = NhibernateHelper.GetSession())
